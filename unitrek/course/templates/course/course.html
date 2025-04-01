@@ -1,0 +1,42 @@
+{% extends "course/base.html" %}
+{% load static %}
+{% block meta %}
+    <style>
+        textarea{
+            width: 100%;
+            height: 20vh;
+        }
+    </style>
+{% endblock %}
+
+{% block title %}{{course.title}}{% endblock %}
+
+{% block content %}
+    <br>
+    <span class="h1">{{course.title}}</span>
+    <br><br>
+    <p><a href="{% url 'courses' %}"><button class="btn btn-secondary">Обратно к курсам</button></a></p>
+    <figure>
+        <img src="{{course.image_path.url}}" width="100%" height="500vh" alt="...">
+    </figure>
+    <p class="lead">{{course.content|linebreaksbr}}</p>
+    <hr>
+    {% if user.is_authenticated %}
+        <h5>Оставить комментарий</h5>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="">
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Отправить комментарий</button>
+            </div>
+        </form>
+    {% else %}
+        <h5>Для добавления своего комментария,пожалуйста, авторизуйтесь</h5>
+    {% endif %}
+    {% for comment in comments %}
+        <hr>
+        <h7>{{comment.date}}</h7>
+        <h5>{{comment.author}}</h5>
+        <p>{{comment.text|linebreaksbr}}</p>
+    {% endfor %}
+{% endblock %}

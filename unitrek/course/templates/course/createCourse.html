@@ -1,0 +1,25 @@
+{% extends 'course/base.html' %}
+{% load static %}
+{% block meta %}
+    <style>
+      p{
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+{% endblock %}
+
+{% block title %}Создание курса{% endblock %}
+
+{% block content %}
+  <br>
+  <span class="h1">Создание курса</span>
+  <br><br>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="p-3">
+      {{courseform.as_p}}
+      <button type="submit" class="btn btn-success">Добавить курс</button>
+    </div>
+  </form>
+{% endblock %}

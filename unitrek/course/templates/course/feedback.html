@@ -1,0 +1,63 @@
+{% extends 'course/base.html' %}
+{% load static %}
+{% block meta %}
+    <link rel="stylesheet" href="{% static 'course/css/feedback.css' %}">
+{% endblock %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block content %}
+    {% if form != None %}
+        <section class="">
+            <br>
+            <span class="h1">Оставьте ваш отзыв</span>
+            <br><br>
+            <form method="post" class="">
+                {% csrf_token %}
+                <div>
+                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label><br>
+                    {{ form.name }}
+                </div>
+                <div>
+                     <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label><br>
+                    {{ form.email }}
+                </div>
+                <div>
+                     <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label><br>
+                    {{ form.gender }}
+                </div>
+                <div>
+                    <label for="{{ form.job.id_for_label }}">{{ form.job.label }}</label><br>
+                    {{ form.job }}
+                </div>
+                <div>
+                     <label for="{{ form.notice.id_for_label }}">{{ form.notice.label }}</label><br>
+                    {{ form.notice }}
+                </div>
+                <div>
+                     <label for="{{ form.message.id_for_label }}">{{ form.message.label }}</label><br>
+                    {{ form.message }}
+                </div>
+                <br>
+                <input type="submit" value="Отправить" class="btn btn-primary">
+            </form>
+        </section>
+    {% else %}
+    <section>
+        <br>
+        <span class="h1">Спасибо за ваш отзыв!</span>
+        <br><br>
+        <ul class="list-group">
+            <li class="list-group-item"><span>Имя:</span>{{data.name}}</li>
+            <li class="list-group-item"><span>Эл. почта:</span>{{data.email}}</li>
+            <li class="list-group-item"><span>Пол:</span>{{data.gender}}</li>
+            <li class="list-group-item"><span>Тип занятости:</span>{{data.job}}</li>
+            <li class="list-group-item"><span>Подписка на уведомления:</span>{{data.notice}}</li>
+            <li class="list-group-item">
+            <span>Ваш комментарий:</span>{{data.message}}</li>
+        </ul>
+    </section>
+    {% endif %}
+    <script src="{% static 'course
+    /scripts/feedback.js' %}"></script>
+{% endblock %}

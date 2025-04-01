@@ -1,0 +1,37 @@
+{% extends "course/base.html" %}
+{% load static %}
+{% block meta %}
+<style>
+    input[type="text"],input[type="password"]{
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+    <section id="loginForm" class="d-flex flex-column justify-content-start">
+        <br>
+        <span class="h1">Используйте свои данные для входа</span>
+        <br>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div>
+                <label for="id_username" class="">Имя пользователя</label><br>
+                {{ form.username }}
+            </div>
+            <div>
+                <label for="id_password" class="">Пароль</label><br>
+                {{ form.password }}
+            </div><br>
+            <div>
+                <input type="hidden" name="next" value="/" />
+                <input type="submit" value="Войти" class="btn btn-primary" />
+            </div>
+<!--            {% if form.errors %}-->
+<!--                <p class="validation-summary-errors">Пожалуйста, введите корректные данные</p>-->
+<!--            {% endif %}-->
+        </form>
+    </section>
+{% endblock %}
